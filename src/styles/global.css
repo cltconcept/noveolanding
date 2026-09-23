@@ -1441,6 +1441,7 @@
   }
   .footer-bottom > div {
     display: flex;
+    flex-wrap: wrap;
     gap: 25px;
   }
   .footer-bottom a:hover {
