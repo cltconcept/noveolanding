@@ -41,7 +41,7 @@ Le formulaire reprend le destinataire FormBold de l’ancien site : `https://for
 
 L’envoi nécessite que le compte FormBold existant soit actif et accepte le domaine de déploiement. Les tests simulent les réponses du service pour éviter d’envoyer des demandes fictives. Ils ne vérifient pas la réception effective d’un e-mail.
 
-Les coordonnées et l’hébergement Hostinger des mentions légales sont repris du site d’origine ; les mettre à jour si l’hébergement ou l’entreprise change. Le lien Calendly conserve le compte existant, sans la date figée de l’ancien site.
+Les coordonnées et l’hébergement Hostinger des mentions légales sont repris du site d’origine ; les mettre à jour si l’hébergement ou l’entreprise change.
 
 ## Déployer sur l’hébergement existant
 

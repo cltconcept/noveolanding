@@ -117,7 +117,6 @@ const fr = {
     title: 'Une idée en tête ?',
     accent: 'Faisons-la avancer.',
     button: 'Parlons de votre projet',
-    alternative: 'Ou réservez un échange de 30 minutes',
     footerLine: 'Créativité. Technologie. Proximité.',
     footerText: 'Un seul partenaire pour donner vie à vos ambitions digitales.',
     expertise: 'Nos expertises',
@@ -146,8 +145,6 @@ const fr = {
     accent: 'de votre projet ?',
     intro:
       'Une idée à concrétiser, un outil à améliorer ou une question à poser ? Racontez-nous. On commence par vous écouter.',
-    direct: 'Vous préférez un échange direct ?',
-    call: 'Réserver un appel de 30 minutes',
     formTitle: 'À vous de jouer.',
     formSubtitle: 'Quelques mots suffisent pour commencer.',
     name: 'Votre nom',
@@ -183,7 +180,7 @@ const fr = {
       'Les informations envoyées via le formulaire de contact sont utilisées pour répondre à votre demande. Le formulaire utilise le prestataire FormBold pour acheminer votre message. Vous pouvez demander l’accès, la rectification ou la suppression de vos données en écrivant à info@noveodigital.be.',
     cookies: 'Cookies et services externes',
     cookiesText:
-      'Ce site ne dépose pas de cookies de mesure d’audience ou publicitaires. Les polices et les images sont hébergées localement. Les liens vers Calendly, Behance et les sites de nos réalisations ouvrent des services externes soumis à leurs propres politiques de confidentialité.',
+      'Ce site ne dépose pas de cookies de mesure d’audience ou publicitaires. Les polices et les images sont hébergées localement. Les liens vers Behance et les sites de nos réalisations ouvrent des services externes soumis à leurs propres politiques de confidentialité.',
     liability: 'Informations du site',
     liabilityText:
       'Noveo Digital s’efforce de maintenir les informations du site exactes et à jour. Pour toute question relative à une prestation, contactez-nous afin d’obtenir une proposition adaptée.',
@@ -316,7 +313,6 @@ const en: Copy = {
     title: 'An idea in mind?',
     accent: 'Let’s move it forward.',
     button: 'Let’s talk about your project',
-    alternative: 'Or book a 30-minute conversation',
     footerLine: 'Creativity. Technology. People.',
     footerText: 'One partner to bring your digital ambitions to life.',
     expertise: 'Our expertise',
@@ -345,8 +341,6 @@ const en: Copy = {
     accent: 'your project.',
     intro:
       'An idea to bring to life, a tool to improve or a question to ask? Tell us about it. We’ll start by listening.',
-    direct: 'Prefer a direct conversation?',
-    call: 'Book a 30-minute call',
     formTitle: 'Over to you.',
     formSubtitle: 'A few words are all it takes to get started.',
     name: 'Your name',
@@ -383,7 +377,7 @@ const en: Copy = {
       'Information submitted through the contact form is used to respond to your enquiry. The form uses FormBold to deliver your message. You can request access, correction or deletion of your data by emailing info@noveodigital.be.',
     cookies: 'Cookies and external services',
     cookiesText:
-      'This website does not set analytics or advertising cookies. Fonts and images are hosted locally. Links to Calendly, Behance and our projects open external services with their own privacy policies.',
+      'This website does not set analytics or advertising cookies. Fonts and images are hosted locally. Links to Behance and our projects open external services with their own privacy policies.',
     liability: 'Website information',
     liabilityText:
       'Noveo Digital aims to keep the website information accurate and up to date. Contact us for a proposal tailored to your requirements.',
@@ -515,7 +509,6 @@ const nl: Copy = {
     title: 'Een idee in gedachten?',
     accent: 'Laten we het waarmaken.',
     button: 'Laten we over uw project praten',
-    alternative: 'Of plan een gesprek van 30 minuten',
     footerLine: 'Creativiteit. Technologie. Nabijheid.',
     footerText: 'Eén partner om uw digitale ambities waar te maken.',
     expertise: 'Onze expertises',
@@ -544,8 +537,6 @@ const nl: Copy = {
     accent: 'uw project?',
     intro:
       'Een idee om uit te werken, een tool om te verbeteren of een vraag? Vertel het ons. We beginnen met luisteren.',
-    direct: 'Liever rechtstreeks contact?',
-    call: 'Plan een gesprek van 30 minuten',
     formTitle: 'Aan u het woord.',
     formSubtitle: 'Een paar woorden volstaan om te beginnen.',
     name: 'Uw naam',
@@ -583,7 +574,7 @@ const nl: Copy = {
       'Informatie uit het contactformulier wordt gebruikt om uw vraag te beantwoorden. Het formulier gebruikt FormBold om uw bericht te bezorgen. U kunt inzage, correctie of verwijdering van uw gegevens vragen via info@noveodigital.be.',
     cookies: 'Cookies en externe diensten',
     cookiesText:
-      'Deze website plaatst geen analytische of advertentiecookies. Lettertypes en afbeeldingen worden lokaal gehost. Links naar Calendly, Behance en onze projecten openen externe diensten met hun eigen privacybeleid.',
+      'Deze website plaatst geen analytische of advertentiecookies. Lettertypes en afbeeldingen worden lokaal gehost. Links naar Behance en onze projecten openen externe diensten met hun eigen privacybeleid.',
     liability: 'Website-informatie',
     liabilityText:
       'Noveo Digital streeft ernaar de informatie correct en actueel te houden. Neem contact op voor een voorstel op maat van uw behoeften.',

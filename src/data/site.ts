@@ -22,7 +22,6 @@ export const company = {
   phoneHref: 'tel:+3228086722',
   address: 'Chaussée de Louvain 435, 1380 Lasne, Belgique',
   vat: 'BE1026.000.078',
-  calendly: 'https://calendly.com/bonjour-noveodigital/30min',
 };
 export const projects = [
   {
