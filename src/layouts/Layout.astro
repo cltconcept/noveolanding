@@ -1,0 +1,96 @@
+---
+import '@fontsource-variable/inter/wght.css';
+import '@fontsource-variable/manrope/wght.css';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { locales, pageUrl, company, type Locale, type PageId } from '../data/site';
+import { translations } from '../data/translations';
+interface Props {
+  title: string;
+  description?: string;
+  locale: Locale;
+  page: PageId;
+  showCta?: boolean;
+  noindex?: boolean;
+}
+const {
+  title,
+  description = translations[Astro.props.locale].hero.description,
+  locale,
+  page,
+  showCta = true,
+  noindex = false,
+} = Astro.props;
+const canonical = new URL(pageUrl(locale, page), Astro.site);
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'Noveo Digital',
+  url: Astro.site?.href,
+  image: new URL('/assets/mark.png', Astro.site).href,
+  email: company.email,
+  telephone: company.phone,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Chaussée de Louvain 435',
+    postalCode: '1380',
+    addressLocality: 'Lasne',
+    addressCountry: 'BE',
+  },
+  areaServed: { '@type': 'Country', name: 'Belgium' },
+};
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#090d1b" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title} — Noveo Digital</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    {!noindex && <link rel="canonical" href={canonical} />}
+    {!noindex &&
+      locales.map((lang) => (
+        <link
+          rel="alternate"
+          hreflang={lang === 'en' ? 'en' : `${lang}-BE`}
+          href={new URL(pageUrl(lang, page), Astro.site)}
+        />
+      ))}
+    {!noindex && (
+      <link rel="alternate" hreflang="x-default" href={new URL(pageUrl('fr', page), Astro.site)} />
+    )}
+    <meta
+      name="robots"
+      content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large'}
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Noveo Digital" />
+    <meta property="og:title" content={`${title} — Noveo Digital`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={locale === 'en' ? 'en_GB' : `${locale}_BE`} />
+    <meta property="og:image" content={new URL('/og-image.png', Astro.site)} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(schema).replace(/</g, '\\u003c')}
+    ></script>
+  </head>
+  <body>
+    <Header locale={locale} page={page} />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer locale={locale} showCta={showCta} />
+    <script>
+      import '../scripts/site';
+    </script>
+  </body>
+</html>

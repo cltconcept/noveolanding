@@ -1,0 +1,7 @@
+node_modules/
+dist/
+public_html/
+public/
+.astro/
+.qa/
+package-lock.json

@@ -1,0 +1,200 @@
+---
+import Icon from './Icon.astro';
+import { company, pageUrl, type Locale } from '../data/site';
+import { translations } from '../data/translations';
+import { services } from '../data/services';
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = translations[locale];
+const endpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT || 'https://formbold.com/s/oylpz';
+---
+
+<section class="contact-section">
+  <div class="container contact-grid">
+    <div class="contact-intro">
+      <p class="eyebrow" data-hero>
+        <span class="status-dot"></span>
+        {t.contact.eyebrow}
+      </p>
+      <h1 data-hero>
+        {t.contact.title}
+        <br />
+        <span>{t.contact.accent}</span>
+      </h1>
+      <p class="service-lead" data-hero>
+        {t.contact.intro}
+      </p>
+      <div class="contact-details" data-hero>
+        <a href={`mailto:${company.email}`}>
+          <Icon name="mail" size={23} />
+          <span>{company.email}</span>
+          <Icon name="diagonal" size={18} />
+        </a>
+        <a href={company.phoneHref}>
+          <Icon name="telecom" size={23} />
+          <span>{company.phone}</span>
+          <Icon name="diagonal" size={18} />
+        </a>
+        <p>
+          <Icon name="pin" size={23} />
+          <span>
+            Chaussée de Louvain 435
+            <br />
+            1380 Lasne, {locale === 'nl' ? 'België' : locale === 'en' ? 'Belgium' : 'Belgique'}
+          </span>
+        </p>
+      </div>
+      <div class="contact-call" data-hero>
+        <span>{t.contact.direct}</span>
+        <a href={company.calendly} target="_blank" rel="noopener noreferrer" class="text-link">
+          <Icon name="calendar" size={19} />
+          {t.contact.call}
+          <Icon name="diagonal" size={16} />
+        </a>
+      </div>
+    </div>
+    <div class="contact-form-card" data-hero>
+      <span class="form-heading-icon">
+        <Icon name="diagonal" size={30} />
+      </span>
+      <h2>{t.contact.formTitle}</h2>
+      <p>{t.contact.formSubtitle}</p>
+      <form
+        id="contact-form"
+        method="POST"
+        action={endpoint}
+        data-locale={locale}
+        data-error={t.contact.error}
+        data-sending={t.contact.sending}
+        data-send={t.contact.send}
+      >
+        <fieldset class="form-fields">
+          <legend class="sr-only">{t.contact.formTitle}</legend>
+          <div class="form-row">
+            <div class="field">
+              <label for="name">{t.contact.name} *</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                minlength="2"
+                maxlength="120"
+                autocomplete="name"
+                placeholder={
+                  locale === 'fr'
+                    ? 'Prénom et nom'
+                    : locale === 'nl'
+                      ? 'Voor- en achternaam'
+                      : 'Full name'
+                }
+              />
+            </div>
+            <div class="field">
+              <label for="email">{t.contact.email} *</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                maxlength="200"
+                autocomplete="email"
+                placeholder={
+                  locale === 'fr'
+                    ? 'vous@entreprise.be'
+                    : locale === 'nl'
+                      ? 'u@bedrijf.be'
+                      : 'you@company.be'
+                }
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="company">
+                {t.contact.company} <span>({t.contact.optional})</span>
+              </label>
+              <input
+                type="text"
+                id="company"
+                name="company"
+                maxlength="160"
+                autocomplete="organization"
+              />
+            </div>
+            <div class="field">
+              <label for="phone">
+                {t.contact.phone} <span>({t.contact.optional})</span>
+              </label>
+              <input type="tel" id="phone" name="phone" maxlength="40" autocomplete="tel" />
+            </div>
+          </div>
+          <fieldset class="service-choices">
+            <legend>{t.contact.services}</legend>
+            <div>
+              {services[locale].map((s) => (
+                <label class="service-choice">
+                  <input type="checkbox" name="services" value={s.name} data-service-id={s.id} />
+                  <span>
+                    <Icon name={s.id} size={17} />
+                    {s.name}
+                  </span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+          <div class="field">
+            <label for="message">{t.contact.message} *</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="4"
+              required
+              minlength="10"
+              maxlength="3000"
+              placeholder={t.contact.placeholder}
+            ></textarea>
+          </div>
+          <div class="honeypot" aria-hidden="true">
+            <label for="website">Website</label>
+            <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+          <label class="consent">
+            <input type="checkbox" name="consent" required value="yes" />
+            <span>
+              {t.contact.consent} <a href={pageUrl(locale, 'legal')}>{t.contact.privacy}</a>
+            </span>
+          </label>
+          <button type="submit" class="button button-blue form-submit">
+            <span>{t.contact.send}</span>
+            <Icon name="diagonal" size={19} />
+          </button>
+          <p class="form-required">{t.contact.required}</p>
+        </fieldset>
+        <p class="form-status" role="status" aria-live="polite" hidden></p>
+      </form>
+      <div class="form-success" tabindex="-1" hidden>
+        <span class="success-icon">
+          <Icon name="check" size={34} />
+        </span>
+        <h3>
+          {locale === 'fr'
+            ? 'Bien reçu !'
+            : locale === 'nl'
+              ? 'Goed ontvangen!'
+              : 'Message received!'}
+        </h3>
+        <p>{t.contact.success}</p>
+        <button type="button" class="button button-dark" data-form-reset>
+          {t.contact.retry}
+          <Icon name="arrow" size={18} />
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  import '../scripts/contact';
+</script>

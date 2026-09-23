@@ -1,0 +1,38 @@
+---
+import Icon from './Icon.astro';
+import { translations } from '../data/translations';
+import { pageUrl, type Locale } from '../data/site';
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = translations[locale];
+---
+
+<section class="faq-section section light" aria-labelledby="faq-title">
+  <div class="container faq-grid">
+    <div data-reveal>
+      <p class="eyebrow">{t.faq.label}</p>
+      <h2 id="faq-title">{t.faq.title}</h2>
+      <p class="section-description">{t.faq.description}</p>
+      <a href={pageUrl(locale, 'contact')} class="text-link ink">
+        {t.faq.cta}
+        <Icon name="diagonal" size={18} />
+      </a>
+    </div>
+    <div class="faq-list" data-reveal>
+      {t.faq.items.map(([q, a], i) => (
+        <details class="faq-item" name="faq">
+          <summary>
+            <span class="mono faq-number">0{i + 1}</span>
+            <span>{q}</span>
+            <Icon name="plus" size={21} />
+          </summary>
+          <div class="faq-answer">
+            <p>{a}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

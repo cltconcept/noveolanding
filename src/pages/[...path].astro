@@ -1,0 +1,48 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HomePage from '../components/HomePage.astro';
+import ServicePage from '../components/ServicePage.astro';
+import ContactPage from '../components/ContactPage.astro';
+import LegalPage from '../components/LegalPage.astro';
+import { locales, slugs, pageUrl, type Locale, type PageId, type ServiceId } from '../data/site';
+import { translations } from '../data/translations';
+import { services } from '../data/services';
+
+export function getStaticPaths() {
+  return locales.flatMap((locale) =>
+    (Object.keys(slugs) as PageId[]).map((page) => ({
+      params: { path: pageUrl(locale, page).replace(/^\//, '').replace(/\/$/, '') || undefined },
+      props: { locale, page },
+    })),
+  );
+}
+interface Props {
+  locale: Locale;
+  page: PageId;
+}
+const { locale, page } = Astro.props;
+const t = translations[locale];
+const service = services[locale].find((s) => s.id === page);
+const title =
+  page === 'home'
+    ? `${t.hero.line1} ${t.hero.line2} ${t.hero.line3}`
+    : page === 'contact'
+      ? `${t.contact.title} ${t.contact.accent}`
+      : page === 'legal'
+        ? t.legal.title
+        : service!.name;
+const description = service?.description || (page === 'contact' ? t.contact.intro : undefined);
+---
+
+<Layout
+  locale={locale}
+  page={page}
+  title={title}
+  description={description}
+  showCta={page !== 'contact' && page !== 'legal'}
+>
+  {page === 'home' && <HomePage locale={locale} />}
+  {page === 'contact' && <ContactPage locale={locale} />}
+  {page === 'legal' && <LegalPage locale={locale} />}
+  {service && <ServicePage locale={locale} serviceId={page as ServiceId} />}
+</Layout>

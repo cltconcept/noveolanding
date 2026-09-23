@@ -1,0 +1,223 @@
+---
+import Icon from './Icon.astro';
+import Orbit from './Orbit.astro';
+import Projects from './Projects.astro';
+import Faq from './Faq.astro';
+import { translations } from '../data/translations';
+import { services } from '../data/services';
+import { pageUrl, team, type Locale } from '../data/site';
+import assets from '../data/assets.json';
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = translations[locale];
+---
+
+<section class="hero-section" aria-labelledby="hero-title">
+  <div class="hero-ambient" aria-hidden="true"></div>
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow hero-eyebrow" data-hero>
+        <span class="status-dot"></span>
+        {t.hero.eyebrow}
+      </p>
+      <h1 id="hero-title">
+        <span class="hero-line" data-hero>
+          {t.hero.line1}
+        </span>
+        <span class="hero-line" data-hero>
+          {t.hero.line2}
+          <br />
+          <em>{t.hero.line3}</em>
+        </span>
+      </h1>
+      <p class="hero-description" data-hero>
+        {t.hero.description}
+      </p>
+      <div class="hero-actions" data-hero>
+        <a class="button button-blue" href={pageUrl(locale, 'contact')}>
+          {t.hero.primary}
+          <Icon name="diagonal" size={19} />
+        </a>
+        <a class="hero-secondary" href="#expertises">
+          {t.hero.secondary}
+          <Icon name="down" size={17} />
+        </a>
+      </div>
+      <p class="hero-note" data-hero>
+        {t.hero.note}
+      </p>
+    </div>
+    <Orbit locale={locale} />
+  </div>
+  <div class="container hero-bottom">
+    <a href="#expertises" class="scroll-link">
+      <span class="scroll-icon">
+        <Icon name="down" size={14} />
+      </span>
+      {t.hero.scroll}
+    </a>
+    <span class="mono hero-bottom-center">{t.hero.status}</span>
+    <span class="hero-bottom-right">{t.hero.caption}</span>
+  </div>
+</section>
+<div class="expertise-ribbon" aria-hidden="true">
+  <div class="container">
+    {services[locale].slice(0, 4).map((service, i) => (
+      <span>
+        <span class="mono">0{i + 1}</span>
+        {service.name}
+        <span class="ribbon-star">✳</span>
+      </span>
+    ))}
+  </div>
+</div>
+
+<section class="services-section section light" id="expertises" aria-labelledby="services-title">
+  <div class="container">
+    <div class="section-heading" data-reveal>
+      <div>
+        <p class="eyebrow">{t.services.label}</p>
+        <h2 id="services-title">
+          {t.services.title}
+          <br />
+          <span class="muted">{t.services.accent}</span>
+        </h2>
+      </div>
+      <p class="section-description">{t.services.description}</p>
+    </div>
+    <div class="services-grid">
+      {services[locale].slice(0, 4).map((service, i) => (
+        <a
+          href={pageUrl(locale, service.id)}
+          class={`service-card service-card-${service.id}`}
+          data-reveal
+        >
+          <div class="service-card-top">
+            <span class="service-icon">
+              <Icon name={service.id} size={30} />
+            </span>
+            <span class="mono">0{i + 1}</span>
+          </div>
+          <div class="service-card-copy">
+            <h3>{service.name}</h3>
+            <p>{service.short}</p>
+          </div>
+          <div class="service-tags">
+            {service.tags.slice(0, 2).map((tag) => (
+              <span>{tag}</span>
+            ))}
+          </div>
+          <span class="service-card-link">
+            {t.services.more}
+            <span class="circle-arrow">
+              <Icon name="diagonal" size={19} />
+            </span>
+          </span>
+        </a>
+      ))}
+    </div>
+    <a href={pageUrl(locale, 'print')} class="print-banner" data-reveal>
+      <span class="print-icon">
+        <Icon name="print" size={24} />
+      </span>
+      <span>
+        <strong>{t.services.print}</strong> <span>{t.services.printText}</span>
+      </span>
+      <span class="print-link">
+        {t.services.printLink}
+        <Icon name="diagonal" size={18} />
+      </span>
+    </a>
+  </div>
+</section>
+
+<Projects locale={locale} />
+
+<section class="approach-section section" id="approche" aria-labelledby="approach-title">
+  <div class="container approach-grid">
+    <div class="approach-intro" data-reveal>
+      <p class="eyebrow">{t.approach.label}</p>
+      <h2 id="approach-title">
+        {t.approach.title}
+        <br />
+        <span>{t.approach.accent}</span>
+      </h2>
+      <p class="section-description">{t.approach.description}</p>
+      <a href={pageUrl(locale, 'contact')} class="button button-outline">
+        {t.approach.cta}
+        <Icon name="diagonal" size={18} />
+      </a>
+      <div class="approach-art" aria-hidden="true">
+        <div></div>
+        <div></div>
+        <div></div>
+        <img src="/assets/mark.png" width="72" height="72" loading="lazy" alt="" />
+      </div>
+    </div>
+    <ol class="process-list">
+      {t.approach.steps.map(([title, description], i) => (
+        <li data-reveal>
+          <span class="process-number mono">
+            0{i + 1}
+            <span></span>
+          </span>
+          <div>
+            <h3>{title}</h3>
+            <p>{description}</p>
+          </div>
+          <Icon name="diagonal" size={21} />
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<section class="team-section section light" id="equipe" aria-labelledby="team-title">
+  <div class="container">
+    <div class="section-heading" data-reveal>
+      <div>
+        <p class="eyebrow">{t.team.label}</p>
+        <h2 id="team-title">
+          {t.team.title}
+          <br />
+          <span class="muted">{t.team.accent}</span>
+        </h2>
+      </div>
+      <div class="section-side">
+        <p>{t.team.description}</p>
+        <a href={pageUrl(locale, 'contact')} class="text-link ink">
+          {t.team.cta}
+          <Icon name="diagonal" size={17} />
+        </a>
+      </div>
+    </div>
+    <div class="team-grid">
+      {team.map((person, i) => (
+        <figure class="team-member" data-reveal>
+          <div class="team-portrait">
+            <img
+              src={`/assets/${person.image}.webp`}
+              alt={person.name}
+              width={assets[person.image as keyof typeof assets].width}
+              height={assets[person.image as keyof typeof assets].height}
+              loading="lazy"
+              decoding="async"
+            />
+            <span class="team-plus">+</span>
+          </div>
+          <figcaption>
+            <span>{person.name}</span>
+            <span class="mono">NOVEO / 0{i + 1}</span>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+    <p class="team-location">
+      <span class="status-dot"></span>
+      {t.team.tag}
+    </p>
+  </div>
+</section>
+<Faq locale={locale} />

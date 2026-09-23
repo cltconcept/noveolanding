@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://noveodigital.be/sitemap-index.xml

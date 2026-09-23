@@ -1,0 +1,74 @@
+---
+import { translations } from '../data/translations';
+import { company, type Locale } from '../data/site';
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = translations[locale].legal;
+---
+
+<section class="legal-hero container">
+  <p class="eyebrow">NOVEO DIGITAL</p>
+  <h1>{t.title}</h1>
+  <p>{t.subtitle}</p>
+</section>
+<section class="light section">
+  <div class="container legal-content">
+    <article>
+      <h2>01. {t.publisher}</h2>
+      <p>
+        <strong>{company.name}</strong>
+        <br />
+        {t.address} : {company.address}
+        <br />
+        {t.companyNumber} : {company.vat}
+      </p>
+      <p>
+        <a href={company.phoneHref}>{company.phone}</a>
+        <br />
+        <a href={`mailto:${company.email}`}>{company.email}</a>
+      </p>
+    </article>
+    <article>
+      <h2>02. {t.director}</h2>
+      <p>{t.directorText}</p>
+    </article>
+    <article>
+      <h2>03. {t.hosting}</h2>
+      <p>
+        Hostinger International Ltd.
+        <br />
+        61 Lordou Vironos Street, 6023 Larnaca, Cyprus
+        <br />
+        <a href="https://www.hostinger.com" rel="noopener noreferrer" target="_blank">
+          www.hostinger.com ↗
+        </a>
+      </p>
+    </article>
+    <article>
+      <h2>04. {t.property}</h2>
+      <p>{t.propertyText}</p>
+    </article>
+    <article>
+      <h2>05. {t.data}</h2>
+      <p>{t.dataText}</p>
+    </article>
+    <article>
+      <h2>06. {t.cookies}</h2>
+      <p>{t.cookiesText}</p>
+    </article>
+    <article>
+      <h2>07. {t.liability}</h2>
+      <p>{t.liabilityText}</p>
+    </article>
+    <a
+      class="button button-dark"
+      href="/conditions-generales.pdf"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {t.terms} ↗
+    </a>
+  </div>
+</section>

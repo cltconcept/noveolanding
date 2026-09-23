@@ -1,0 +1,72 @@
+---
+import Icon from './Icon.astro';
+import { translations } from '../data/translations';
+import type { Locale } from '../data/site';
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = translations[locale];
+const labels =
+  locale === 'fr'
+    ? ['Image de marque', 'Web & ERP', 'Télécom', 'Sécurité IT']
+    : locale === 'nl'
+      ? ['Merkidentiteit', 'Web & ERP', 'Telecom', 'IT-beveiliging']
+      : ['Brand identity', 'Web & ERP', 'Telecom', 'IT security'];
+---
+
+<div class="orbit-scene" aria-hidden="true" data-orbit>
+  <div class="orbit-glow"></div>
+  <div class="orbit-grid"></div>
+  <div class="orbit-ring ring-one"></div>
+  <div class="orbit-ring ring-two"></div>
+  <div class="orbit-ring ring-three"></div>
+  <svg class="orbit-connections" viewBox="0 0 560 560" fill="none">
+    <path
+      d="M120 130H200Q230 130 230 170V260H280M450 190H390Q370 190 370 220V280H280M125 385H190Q215 385 215 350V300H280M435 420H355Q335 420 335 380V300H280"
+      stroke="url(#line-gradient)"
+      stroke-width="1.4"
+    />
+    <path
+      class="connection-light"
+      d="M120 130H200Q230 130 230 170V260H280M450 190H390Q370 190 370 220V280H280M125 385H190Q215 385 215 350V300H280M435 420H355Q335 420 335 380V300H280"
+      stroke="#6b9cff"
+      stroke-width="2"
+      stroke-dasharray="12 180"
+    />
+    <defs>
+      <linearGradient id="line-gradient">
+        <stop stop-color="#4b78d0" stop-opacity=".2" />
+        <stop offset=".5" stop-color="#6b9cff" stop-opacity=".8" />
+        <stop offset="1" stop-color="#4b78d0" stop-opacity=".2" />
+      </linearGradient>
+    </defs>
+  </svg>
+  <div class="orbit-center">
+    <div class="orbit-center-face">
+      <img src="/assets/mark.png" width="104" height="104" alt="" />
+      <span>NOVEO</span>
+    </div>
+    <i></i>
+    <i></i>
+  </div>
+  {['brand', 'web', 'telecom', 'it'].map((icon, i) => (
+    <div class={`orbit-node orbit-node-${i}`}>
+      <span class="node-icon">
+        <Icon name={icon} size={23} />
+      </span>
+      <span>{labels[i]}</span>
+      <span class="node-dot"></span>
+    </div>
+  ))}
+  <div class="orbit-note">
+    <span class="status-dot"></span>
+    <span>
+      {t.hero.orbit}
+      <small>{t.hero.orbitSub}</small>
+    </span>
+  </div>
+  <span class="orbit-coordinate mono">50°41′ N — 4°29′ E</span>
+  <span class="orbit-cross cross-one">+</span>
+  <span class="orbit-cross cross-two">+</span>
+</div>

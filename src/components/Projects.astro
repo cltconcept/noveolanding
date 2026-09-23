@@ -1,0 +1,90 @@
+---
+import Icon from './Icon.astro';
+import { projects, type Locale } from '../data/site';
+import { translations } from '../data/translations';
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = translations[locale];
+---
+
+<section class="projects-section section light" id="realisations" aria-labelledby="work-title">
+  <div class="container">
+    <div class="section-heading" data-reveal>
+      <div>
+        <p class="eyebrow">{t.work.label}</p>
+        <h2 id="work-title">
+          {t.work.title}
+          <br />
+          <span class="muted">{t.work.accent}</span>
+        </h2>
+      </div>
+      <div class="section-side">
+        <p>{t.work.description}</p>
+        <div class="slider-controls">
+          <button
+            type="button"
+            class="circle-button prev"
+            data-project-prev
+            aria-label={t.work.prev}
+            aria-controls="project-track"
+          >
+            <Icon name="arrow" />
+          </button>
+          <button
+            type="button"
+            class="circle-button"
+            data-project-next
+            aria-label={t.work.next}
+            aria-controls="project-track"
+          >
+            <Icon name="arrow" />
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      class="project-track"
+      id="project-track"
+      tabindex="0"
+      role="region"
+      aria-label={t.work.title + ' ' + t.work.accent}
+    >
+      {projects.map((project, i) => (
+        <a
+          class="project-card"
+          href={project.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${project.name} — ${t.work.view} (${t.work.external})`}
+        >
+          <div class="project-image" style={`--project-bg:${project.color}`}>
+            <span class="project-index mono">0{i + 1} / NOVEO</span>
+            <img
+              src={`/assets/${project.image}.webp`}
+              alt={project.name}
+              width="1101"
+              height="1100"
+              loading="lazy"
+              decoding="async"
+            />
+            <span class="project-view">
+              <Icon name="diagonal" size={28} />
+            </span>
+          </div>
+          <div class="project-info">
+            <div>
+              <h3>{project.name}</h3>
+              <p>{locale === 'fr' ? project.category : t.work.category}</p>
+            </div>
+            <Icon name="diagonal" size={22} />
+          </div>
+        </a>
+      ))}
+    </div>
+    <div class="project-progress" aria-hidden="true">
+      <span></span>
+    </div>
+  </div>
+</section>

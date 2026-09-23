@@ -1,0 +1,69 @@
+# Deploy ONLY the contents of dist/ into the web root.
+Options -Indexes
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+<IfModule mod_rewrite.c>
+RewriteEngine On
+# Block legacy private files if any remain on an existing host.
+RewriteRule (^|/)(?:MDP\.txt|backup\.pst|public_html|\.env|node_modules)(?:/|$) - [F,L,NC]
+RewriteRule \.(?:pst|docx?|xlsx?|indd|zip)$ - [F,L,NC]
+RewriteCond %{THE_REQUEST} "\s/+index\.html(?:[?\s])"
+RewriteRule ^index\.html/?$ / [R=301,L,NE]
+RewriteRule ^index/?$ / [R=301,L,NE]
+RewriteRule ^index-nl\.html/?$ /nl/ [R=301,L,NE]
+RewriteRule ^index-nl/?$ /nl/ [R=301,L,NE]
+RewriteRule ^index-en\.html/?$ /en/ [R=301,L,NE]
+RewriteRule ^index-en/?$ /en/ [R=301,L,NE]
+RewriteRule ^image-de-marque\.html/?$ /image-de-marque/ [R=301,L,NE]
+RewriteRule ^image-de-marque-nl\.html/?$ /nl/image-de-marque/ [R=301,L,NE]
+RewriteRule ^image-de-marque-nl/?$ /nl/image-de-marque/ [R=301,L,NE]
+RewriteRule ^image-de-marque-en\.html/?$ /en/image-de-marque/ [R=301,L,NE]
+RewriteRule ^image-de-marque-en/?$ /en/image-de-marque/ [R=301,L,NE]
+RewriteRule ^Web&Erp\.html/?$ /web-erp/ [R=301,L,NE]
+RewriteRule ^Web&Erp/?$ /web-erp/ [R=301,L,NE]
+RewriteRule ^Web&Erp-nl\.html/?$ /nl/web-erp/ [R=301,L,NE]
+RewriteRule ^Web&Erp-nl/?$ /nl/web-erp/ [R=301,L,NE]
+RewriteRule ^Web&Erp-en\.html/?$ /en/web-erp/ [R=301,L,NE]
+RewriteRule ^Web&Erp-en/?$ /en/web-erp/ [R=301,L,NE]
+RewriteRule ^Telecom\.html/?$ /telecom/ [R=301,L,NE]
+RewriteRule ^Telecom/?$ /telecom/ [R=301,L,NE]
+RewriteRule ^Telecom-nl\.html/?$ /nl/telecom/ [R=301,L,NE]
+RewriteRule ^Telecom-nl/?$ /nl/telecom/ [R=301,L,NE]
+RewriteRule ^Telecom-en\.html/?$ /en/telecom/ [R=301,L,NE]
+RewriteRule ^Telecom-en/?$ /en/telecom/ [R=301,L,NE]
+RewriteRule ^IT-et-cybersecurite\.html/?$ /it-cybersecurite/ [R=301,L,NE]
+RewriteRule ^IT-et-cybersecurite/?$ /it-cybersecurite/ [R=301,L,NE]
+RewriteRule ^IT-et-cybersecurite-nl\.html/?$ /nl/it-cybersecurite/ [R=301,L,NE]
+RewriteRule ^IT-et-cybersecurite-nl/?$ /nl/it-cybersecurite/ [R=301,L,NE]
+RewriteRule ^IT-et-cybersecurite-en\.html/?$ /en/it-cybersecurite/ [R=301,L,NE]
+RewriteRule ^IT-et-cybersecurite-en/?$ /en/it-cybersecurite/ [R=301,L,NE]
+RewriteRule ^Impression\.html/?$ /impression/ [R=301,L,NE]
+RewriteRule ^Impression/?$ /impression/ [R=301,L,NE]
+RewriteRule ^Impression-nl\.html/?$ /nl/impression/ [R=301,L,NE]
+RewriteRule ^Impression-nl/?$ /nl/impression/ [R=301,L,NE]
+RewriteRule ^Impression-en\.html/?$ /en/impression/ [R=301,L,NE]
+RewriteRule ^Impression-en/?$ /en/impression/ [R=301,L,NE]
+RewriteRule ^contact\.html/?$ /contact/ [R=301,L,NE]
+RewriteRule ^contact-nl\.html/?$ /nl/contact/ [R=301,L,NE]
+RewriteRule ^contact-nl/?$ /nl/contact/ [R=301,L,NE]
+RewriteRule ^contact-en\.html/?$ /en/contact/ [R=301,L,NE]
+RewriteRule ^contact-en/?$ /en/contact/ [R=301,L,NE]
+RewriteRule ^mentions-legales\.html/?$ /mentions-legales/ [R=301,L,NE]
+RewriteRule ^mentions-legales-nl\.html/?$ /nl/mentions-legales/ [R=301,L,NE]
+RewriteRule ^mentions-legales-nl/?$ /nl/mentions-legales/ [R=301,L,NE]
+RewriteRule ^mentions-legales-en\.html/?$ /en/mentions-legales/ [R=301,L,NE]
+RewriteRule ^mentions-legales-en/?$ /en/mentions-legales/ [R=301,L,NE]
+RewriteRule ^Contact-1\.html/?$ /contact/ [R=301,L,NE]
+RewriteRule ^conditions-generales/?$ /conditions-generales.pdf [R=301,L,NE]
+RewriteRule ^conditions-générales/?$ /conditions-generales.pdf [R=301,L,NE]
+</IfModule>
+<IfModule mod_headers.c>
+Header always set X-Content-Type-Options "nosniff"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+Header always set X-Frame-Options "SAMEORIGIN"
+</IfModule>
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresByType image/webp "access plus 30 days"
+ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>

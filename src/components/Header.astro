@@ -1,0 +1,101 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { locales, pageUrl, type Locale, type PageId } from '../data/site';
+import { translations } from '../data/translations';
+import { services } from '../data/services';
+interface Props {
+  locale: Locale;
+  page: PageId;
+}
+const { locale, page } = Astro.props;
+const t = translations[locale];
+const nav = [
+  [t.nav.expertise, 'expertises'],
+  [t.nav.approach, 'approche'],
+  [t.nav.work, 'realisations'],
+];
+---
+
+<a class="skip-link" href="#main">
+  {t.nav.skip}
+</a>
+<header class="site-header" id="top">
+  <div class="container header-inner">
+    <a class="logo-link" href={pageUrl(locale)} aria-label={`Noveo Digital — ${t.nav.home}`}>
+      <Logo />
+    </a>
+    <nav class="desktop-nav" aria-label={t.nav.home}>
+      {nav.map(([label, anchor]) => (
+        <a href={`${pageUrl(locale)}#${anchor}`}>{label}</a>
+      ))}
+    </nav>
+    <div class="header-actions">
+      <details class="language-switch">
+        <summary aria-label={t.nav.language}>
+          {locale.toUpperCase()} <Icon name="chevron" size={14} />
+        </summary>
+        <div class="language-options">
+          {locales.map((lang) => (
+            <a
+              href={pageUrl(lang, page)}
+              lang={lang}
+              hreflang={lang}
+              aria-current={lang === locale ? 'true' : undefined}
+            >
+              {{ fr: 'Français', nl: 'Nederlands', en: 'English' }[lang]}{' '}
+              {lang === locale && <Icon name="check" size={14} />}
+            </a>
+          ))}
+        </div>
+      </details>
+      <a class="button button-small button-white header-contact" href={pageUrl(locale, 'contact')}>
+        {t.nav.contact}
+        <Icon name="diagonal" size={17} />
+      </a>
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="mobile-navigation"
+        aria-label={t.nav.open}
+        data-open-label={t.nav.open}
+        data-close-label={t.nav.close}
+      >
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+  <nav id="mobile-navigation" class="mobile-nav" aria-label={t.nav.expertise} inert>
+    <div class="container">
+      {nav.map(([label, anchor], i) => (
+        <a class="mobile-primary" href={`${pageUrl(locale)}#${anchor}`}>
+          <span class="mono">0{i + 1}</span>
+          {label}
+          <Icon name="diagonal" />
+        </a>
+      ))}
+      <div class="mobile-services">
+        {services[locale].map((service) => (
+          <a href={pageUrl(locale, service.id)}>{service.name}</a>
+        ))}
+      </div>
+      <a class="button button-blue" href={pageUrl(locale, 'contact')}>
+        {t.nav.contact}
+        <Icon name="diagonal" size={18} />
+      </a>
+      <div class="mobile-languages">
+        {locales.map((lang) => (
+          <a
+            href={pageUrl(lang, page)}
+            lang={lang}
+            aria-current={lang === locale ? 'true' : undefined}
+          >
+            {lang.toUpperCase()}
+          </a>
+        ))}
+      </div>
+    </div>
+  </nav>
+</header>

@@ -1,0 +1,135 @@
+---
+import Icon from './Icon.astro';
+import Projects from './Projects.astro';
+import Faq from './Faq.astro';
+import { translations } from '../data/translations';
+import { services } from '../data/services';
+import { pageUrl, type Locale, type ServiceId } from '../data/site';
+import assets from '../data/assets.json';
+interface Props {
+  locale: Locale;
+  serviceId: ServiceId;
+}
+const { locale, serviceId } = Astro.props;
+const t = translations[locale];
+const service = services[locale].find((s) => s.id === serviceId)!;
+const asset = assets[serviceId];
+---
+
+<section class="service-hero">
+  <div class="container">
+    <nav class="breadcrumb" aria-label={t.nav.home}>
+      <a href={pageUrl(locale)}>{t.nav.home}</a>
+      <span>/</span>
+      <span>{service.name}</span>
+    </nav>
+    <div class="service-hero-grid">
+      <div>
+        <p class="eyebrow" data-hero>
+          <Icon name={serviceId} size={19} />
+          {service.name}
+        </p>
+        <h1 data-hero>{service.title}</h1>
+        <p class="service-lead" data-hero>
+          {service.description}
+        </p>
+        <a
+          class="button button-blue"
+          href={`${pageUrl(locale, 'contact')}?service=${serviceId}`}
+          data-hero
+        >
+          {t.detail.cta}
+          <Icon name="diagonal" size={19} />
+        </a>
+        <p class="hero-note" data-hero>
+          {t.detail.audit}
+        </p>
+      </div>
+      <div class={`service-visual visual-${serviceId}`} data-hero>
+        <div class="service-visual-ring"></div>
+        <img
+          src={`/assets/${serviceId}.webp`}
+          width={asset.width}
+          height={asset.height}
+          alt={service.name}
+          fetchpriority="high"
+        />
+        <div class="service-visual-label">
+          <Icon name={serviceId} size={24} />
+          <span>
+            {service.name}
+            <small>{t.detail.included}</small>
+          </span>
+          <span class="status-dot"></span>
+        </div>
+      </div>
+    </div>
+    <div class="service-hero-tags">
+      {service.tags.map((tag) => (
+        <span>
+          <Icon name="check" size={17} />
+          {tag}
+        </span>
+      ))}
+    </div>
+  </div>
+</section>
+<section class="section light service-features">
+  <div class="container">
+    <div class="section-heading" data-reveal>
+      <div>
+        <p class="eyebrow">{t.detail.features}</p>
+        <h2>{t.detail.intro}</h2>
+      </div>
+      <span class="oversized-icon">
+        <Icon name={serviceId} size={70} />
+      </span>
+    </div>
+    <div class="features-grid">
+      {service.features.map((feature, i) => (
+        <article data-reveal>
+          <span class="mono feature-number">0{i + 1}</span>
+          <h3>{feature.title}</h3>
+          <p>{feature.description}</p>
+        </article>
+      ))}
+    </div>
+    <div class="benefit-panel" data-reveal>
+      <Icon name={serviceId} size={42} />
+      <div>
+        <h3>{t.detail.benefit}</h3>
+        <p>{t.detail.benefitText}</p>
+      </div>
+      <a
+        class="circle-button"
+        href={`${pageUrl(locale, 'contact')}?service=${serviceId}`}
+        aria-label={t.detail.cta}
+      >
+        <Icon name="diagonal" size={24} />
+      </a>
+    </div>
+  </div>
+</section>
+{(serviceId === 'brand' || serviceId === 'web') && <Projects locale={locale} />}
+<Faq locale={locale} />
+<section class="related-section section">
+  <div class="container">
+    <div class="section-heading" data-reveal>
+      <div>
+        <p class="eyebrow">{t.detail.relatedSub}</p>
+        <h2>{t.detail.related}</h2>
+      </div>
+    </div>
+    <div class="related-grid">
+      {services[locale]
+        .filter((s) => s.id !== serviceId)
+        .map((s) => (
+          <a href={pageUrl(locale, s.id)}>
+            <Icon name={s.id} size={28} />
+            <h3>{s.name}</h3>
+            <Icon name="diagonal" size={22} />
+          </a>
+        ))}
+    </div>
+  </div>
+</section>

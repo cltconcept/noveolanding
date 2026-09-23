@@ -1,0 +1,15 @@
+---
+interface Props {
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+---
+
+<span class:list={['logo', { 'logo-compact': compact }]} aria-label="Noveo Digital">
+  <img src="/assets/mark.png" width="42" height="42" alt="" />
+  {!compact && (
+    <span class="logo-word">
+      noveo<span class="logo-digital">digital</span>
+    </span>
+  )}
+</span>

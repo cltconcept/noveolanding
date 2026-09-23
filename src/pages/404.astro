@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import { translations } from '../data/translations';
+const t = translations.fr.notFound;
+---
+
+<Layout title="Page introuvable" locale="fr" page="home" noindex showCta={false}>
+  <section class="not-found container">
+    <span class="not-found-number" aria-hidden="true">
+      404
+    </span>
+    <p class="eyebrow">NOVEO DIGITAL</p>
+    <h1>{t.title}</h1>
+    <p>{t.text}</p>
+    <a href="/" class="button button-blue">
+      {t.back}
+      <Icon name="arrow" size={20} />
+    </a>
+  </section>
+</Layout>

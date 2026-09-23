@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      @font-face {
+        font-family: Manrope;
+        src: url('http://127.0.0.1:4321/node_modules/@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2');
+        font-weight: 200 800;
+        font-display: block;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        background: #090d1b;
+        color: #f5f6fa;
+        font-family: Manrope, sans-serif;
+        padding: 65px 74px;
+        position: relative;
+      }
+      .logo {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        font-size: 39px;
+        letter-spacing: -2px;
+        font-weight: 650;
+      }
+      .logo img {
+        width: 39px;
+      }
+      h1 {
+        font-size: 76px;
+        line-height: 1.09;
+        letter-spacing: -4px;
+        font-weight: 550;
+        margin: 52px 0 26px;
+        position: relative;
+        z-index: 2;
+      }
+      h1 span {
+        color: #8aabff;
+      }
+      .subtitle {
+        font-size: 16px;
+        color: #a6b2cc;
+        max-width: 520px;
+        line-height: 1.7;
+      }
+      .tag {
+        position: absolute;
+        bottom: 49px;
+        font-size: 10px;
+        letter-spacing: 2px;
+        color: #a4b0c8;
+      }
+      .domain {
+        position: absolute;
+        right: 65px;
+        bottom: 49px;
+        font-size: 13px;
+        color: #a4b0c8;
+      }
+      .art {
+        position: absolute;
+        right: 79px;
+        top: 155px;
+        width: 340px;
+        height: 340px;
+        border: 1px solid #6989c627;
+        border-radius: 50%;
+        box-shadow:
+          0 0 0 48px #4566a207,
+          0 0 0 96px #4566a205;
+        background: radial-gradient(#3662bc22, transparent 75%);
+      }
+      .cube {
+        position: absolute;
+        inset: 68px;
+        border: 1px solid #789ddb66;
+        background: linear-gradient(130deg, #304666, #13203c);
+        border-radius: 35px;
+        transform: rotate(-12deg);
+        display: grid;
+        place-items: center;
+        box-shadow:
+          14px 18px 0 #29426544,
+          27px 34px 0 #29426522,
+          0 25px 70px #0006;
+      }
+      .cube img {
+        width: 112px;
+        filter: brightness(1.4);
+      }
+      .node {
+        position: absolute;
+        width: 49px;
+        height: 49px;
+        border-radius: 10px;
+        background: #17213a;
+        border: 1px solid #7d9ccb45;
+        display: grid;
+        place-items: center;
+        color: #8cabed;
+        font-size: 26px;
+        font-weight: 400;
+      }
+      .node.one {
+        top: 0;
+        left: -20px;
+      }
+      .node.two {
+        top: 105px;
+        right: -36px;
+      }
+      .node.three {
+        bottom: 5px;
+        left: 6px;
+      }
+      .node.four {
+        bottom: -23px;
+        right: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="logo"><img src="http://127.0.0.1:4321/assets/mark.png" alt="" />noveo</div>
+    <h1>Toutes vos idées.<br />Un seul<br /><span>partenaire.</span></h1>
+    <p class="subtitle">
+      Créativité, technologie et proximité.<br />Votre partenaire digital en Belgique.
+    </p>
+    <div class="art">
+      <div class="cube"><img src="http://127.0.0.1:4321/assets/mark.png" alt="" /></div>
+      <span class="node one">✳</span><span class="node two">⌘</span><span class="node three">↗</span
+      ><span class="node four">+</span>
+    </div>
+    <div class="tag">IMAGE DE MARQUE · WEB · TÉLÉCOM · IT</div>
+    <div class="domain">noveodigital.be</div>
+  </body>
+</html>
