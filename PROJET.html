@@ -177,7 +177,8 @@ python scripts/review.py</code></pre>
     <h2><span>📦</span>Déploiement</h2>
     <ul>
       <li><strong>Plateforme</strong> : Coolify (<code>188.245.156.214</code>), conteneur nginx statique. Dépôt <code>github.com/cltconcept/noveolanding</code>, branche <code>main</code>.</li>
-      <li><strong>Étapes</strong> : push sur <code>main</code>. Le dernier commit était en ligne le 2026-10-06, ce qui fait penser à un redéploiement automatique.</li>
+      <li><strong>Étapes</strong> : push sur <code>main</code>, puis <strong>Deploy à la main dans Coolify</strong>. Le push du 2026-10-06 n'a pas redéployé tout seul : rien après 10 min, en ligne seulement après un déploiement manuel.</li>
+      <li><strong>Contrôle après déploiement</strong> : <code>curl -s https://noveodigital.be/contact/ | grep -ci formbold</code> doit répondre <code>0</code>.</li>
       <li><strong>Production</strong> : <a href="https://noveodigital.be">https://noveodigital.be</a></li>
     </ul>
   </section>

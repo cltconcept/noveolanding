@@ -88,5 +88,6 @@ noveo-landing/
 ## Déploiement
 
 - **Plateforme** : Coolify (`188.245.156.214`), conteneur nginx statique. Dépôt `github.com/cltconcept/noveolanding`, branche `main`.
-- **Étapes** : push sur `main`. Le dernier commit était en ligne le 2026-10-06, ce qui fait penser à un redéploiement automatique.
+- **Étapes** : push sur `main`, puis **Deploy à la main dans Coolify**. Le push du 2026-10-06 n'a pas redéployé tout seul : rien après 10 min, en ligne seulement après un déploiement manuel.
+- **Contrôle après déploiement** : `curl -s https://noveodigital.be/contact/ | grep -ci formbold` doit répondre `0`.
 - **Production** : https://noveodigital.be
