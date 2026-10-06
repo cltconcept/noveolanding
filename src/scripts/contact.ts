@@ -1,3 +1,5 @@
+// Kept out of the HTML on purpose: bots that read <form action> post straight to the endpoint.
+const endpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT || 'https://formbold.com/s/6lnvy';
 const form = document.querySelector<HTMLFormElement>('#contact-form');
 if (form) {
   const fields = form.querySelector<HTMLFieldSetElement>('.form-fields')!;
@@ -18,14 +20,14 @@ if (form) {
       success.hidden = false;
       success.focus();
     };
-    if (String(data.get('website') || '').trim()) {
+    // FormBold's own honeypot: sent along (empty) so the service also rejects it when filled.
+    if (String(data.get('_gotcha') || '').trim()) {
       showSuccess();
       return;
     }
     data.set('services', data.getAll('services').join(', '));
     data.set('language', form.dataset.locale || 'fr');
     data.set('_subject', 'Nouveau contact — Noveo Digital');
-    data.delete('website');
     pending = true;
     status.hidden = true;
     fields.disabled = true;
@@ -34,7 +36,7 @@ if (form) {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 15000);
     try {
-      const response = await fetch(form.action, {
+      const response = await fetch(endpoint, {
         method: 'POST',
         body: data,
         signal: controller.signal,

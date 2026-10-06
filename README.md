@@ -37,7 +37,9 @@ Le français est à la racine ; les autres langues utilisent `/nl/` et `/en/`. L
 
 ## Contact
 
-Le formulaire reprend le destinataire FormBold de l’ancien site : `https://formbold.com/s/oylpz`. Pour le changer, recopier `.env.example` vers `.env` et modifier `PUBLIC_CONTACT_ENDPOINT`, puis reconstruire le site.
+Le formulaire envoie à FormBold (`https://formbold.com/s/6lnvy` par défaut). Pour le changer, recopier `.env.example` vers `.env` et modifier `PUBLIC_CONTACT_ENDPOINT`, puis reconstruire le site.
+
+Anti-spam : l’adresse FormBold ne figure **jamais dans le HTML** (pas d’attribut `action`, script jamais intégré à la page — cf. `assetsInlineLimit` dans `astro.config.mjs`). Les robots relèvent les `<form action>` et envoient directement au service, sans passer par la page : c’est ce qui a fait déferler le spam après la refonte du 2026-09-23. Le piège porte le nom attendu par FormBold, `_gotcha`, et lui est transmis : il est refusé côté navigateur **et** côté service. Contrepartie : sans JavaScript, le formulaire ne s’envoie pas (l’adresse e-mail reste affichée à côté).
 
 L’envoi nécessite que le compte FormBold existant soit actif et accepte le domaine de déploiement. Les tests simulent les réponses du service pour éviter d’envoyer des demandes fictives. Ils ne vérifient pas la réception effective d’un e-mail.
 

@@ -76,6 +76,8 @@ with sync_playwright() as p:
 
     page.goto(BASE+'/contact/?service=it')
     expect(page.locator('[data-service-id="it"]')).to_be_checked()
+    assert page.locator('#contact-form').get_attribute('action') is None, 'endpoint must not be exposed in HTML'
+    assert 'formbold' not in page.content(), 'endpoint must not be exposed in HTML'
     assert not page.locator('#contact-form').evaluate('(el)=>el.checkValidity()')
     page.locator('#name').fill('Test local')
     page.locator('#email').fill('test@example.invalid')
@@ -102,11 +104,20 @@ with sync_playwright() as p:
     page.locator('.form-submit').click()
     expect(page.locator('.form-success')).to_be_visible()
     assert sent and 'IT & cybersécurité' in sent[0] and 'name="language"' in sent[0]
+    assert 'name="_gotcha"' in sent[0], 'FormBold honeypot must be sent'
     expect(page.locator('.form-success')).to_be_focused()
     page.locator('[data-form-reset]').click()
     expect(page.locator('#contact-form')).to_be_visible()
     expect(page.locator('#name')).to_be_focused()
-    results.append('Contact preselection, required fields, server error, rejected payload, success and reset (mocked)')
+    page.locator('#name').fill('Robot')
+    page.locator('#email').fill('bot@example.invalid')
+    page.locator('#message').fill('Message de robot qui remplit le piège.')
+    page.locator('input[name="consent"]').check()
+    page.locator('input[name="_gotcha"]').evaluate('(el)=>{el.value="https://spam.invalid"}')
+    page.locator('.form-submit').click()
+    expect(page.locator('.form-success')).to_be_visible()
+    assert len(sent) == 1, 'a filled honeypot must not be sent'
+    results.append('Contact preselection, required fields, server error, rejected payload, success, reset and honeypot (mocked)')
 
     page.goto(BASE+'/')
     assert page.locator('.orbit-node').first.evaluate('(el)=>getComputedStyle(el).animationName')=='none'

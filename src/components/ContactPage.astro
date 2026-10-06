@@ -8,7 +8,6 @@ interface Props {
 }
 const { locale } = Astro.props;
 const t = translations[locale];
-const endpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT || 'https://formbold.com/s/oylpz';
 ---
 
 <section class="contact-section">
@@ -53,10 +52,10 @@ const endpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT || 'https://formbold.co
       </span>
       <h2>{t.contact.formTitle}</h2>
       <p>{t.contact.formSubtitle}</p>
+      {/* No action attribute: spam bots harvest <form action> URLs and post to them directly. */}
       <form
         id="contact-form"
         method="POST"
-        action={endpoint}
         data-locale={locale}
         data-error={t.contact.error}
         data-sending={t.contact.sending}
@@ -151,7 +150,7 @@ const endpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT || 'https://formbold.co
           </div>
           <div class="honeypot" aria-hidden="true">
             <label for="website">Website</label>
-            <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+            <input id="website" name="_gotcha" type="text" tabindex="-1" autocomplete="off" />
           </div>
           <label class="consent">
             <input type="checkbox" name="consent" required value="yes" />
